@@ -25,14 +25,19 @@ export default {
   methods: {
     async login() {
       try {
-        await this.$http.post("/auth/login", {
+        const response = await this.$http.post("/auth/login", {
           loginId: this.loginId,
           password: this.password,
         });
+
+        // 로그인 성공 시 store_id와 auth를 로컬 스토리지에 저장
         localStorage.setItem("auth", true); // 로그인 상태 저장
-        this.$router.push("/dashboard"); // 로그인 성공 후 대시보드로 리다이렉트
+        localStorage.setItem("store_id", response.data.storeId); // store_id 저장
+
+        this.$router.push("/menu"); // 로그인 성공 후 대시보드로 리다이렉트
       } catch (error) {
         alert("Login failed");
+        console.error("로그인 중 오류:", error);
       }
     },
   },
@@ -40,17 +45,15 @@ export default {
 </script>
 
 <style scoped>
-/* 전체 컨테이너 스타일 */
+/* 스타일 동일 */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f5; /* 부드러운 배경색 */
+  background-color: #f0f0f5;
   padding: 20px;
 }
-
-/* 로그인 박스 스타일 */
 .login-box {
   width: 400px;
   padding: 30px 20px;
@@ -58,40 +61,33 @@ export default {
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   text-align: center;
-  box-sizing: border-box; /* 박스 크기 계산 */
+  box-sizing: border-box;
 }
-
-/* 제목 스타일 */
 .login-box h1 {
   font-size: 28px;
   margin-bottom: 30px;
   color: #333333;
   font-weight: bold;
 }
-
-/* 입력 필드 스타일 */
 .input-field {
-  width: calc(100% - 20px); /* 여유 공간을 포함해 너비 설정 */
-  padding: 12px; /* 여유 있는 패딩 */
+  width: calc(100% - 20px);
+  padding: 12px;
   margin-bottom: 20px;
   border: 2px solid #dddddd;
   border-radius: 10px;
   font-size: 18px;
   background-color: #fafafa;
   transition: border-color 0.3s;
-  box-sizing: border-box; /* 패딩과 경계 포함 계산 */
+  box-sizing: border-box;
 }
-
 .input-field:focus {
-  border-color: #00aaff; /* 포커스 시 강조 */
+  border-color: #00aaff;
   outline: none;
 }
-
-/* 버튼 스타일 */
 .login-button {
   width: 100%;
   padding: 15px;
-  background-color: #000000; /* 버튼 색상을 검정으로 변경 */
+  background-color: #000000;
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -100,12 +96,9 @@ export default {
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
-
 .login-button:hover {
-  background-color: #333333; /* 버튼 호버 시 조금 더 어두운 색 */
+  background-color: #333333;
 }
-
-/* 반응형 디자인 */
 @media screen and (max-width: 768px) {
   .login-box {
     width: 90%;

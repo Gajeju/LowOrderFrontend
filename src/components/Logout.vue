@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <h1>Dashboard</h1>
-    <p>Welcome to the dashboard!</p>
-    <button @click="logout">Logout</button>
-  </div>
+  <button @click="logout">로그아웃</button>
 </template>
 
 <script>
@@ -16,3 +12,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* 스타일 필요시 추가 */
+</style>
