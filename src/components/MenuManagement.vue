@@ -309,41 +309,77 @@ export default {
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 400px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #2d3436;
+  font-weight: bold;
+}
+
+.modal-content label {
+  display: block;
+  font-size: 14px;
+  color: #636e72;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dfe6e9;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.modal-content input:focus {
+  border-color: #00b894;
+  outline: none;
 }
 
 .submit-button {
-  background-color: #00b894;
+  background-color: #0984e3;
   color: white;
-  padding: 10px;
+  padding: 12px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
   width: 100%;
 }
 
 .submit-button:hover {
-  background-color: #00a17e;
+  background-color: #74b9ff;
 }
 
 .close-button {
-  background-color: #d63031;
+  background-color: #000000;
   color: white;
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .close-button:hover {
-  background-color: #c0392b;
+  background-color: #333333;
 }
-
 .no-menu {
   text-align: center;
   color: #636e72;

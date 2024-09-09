@@ -1,5 +1,5 @@
 <template>
-  <button @click="logout">로그아웃</button>
+  <button @click="logout" class="logout-button">로그아웃</button>
 </template>
 
 <script>
@@ -14,5 +14,13 @@ export default {
 </script>
 
 <style scoped>
-/* 스타일 필요시 추가 */
+.logout-button {
+  padding: 10px 20px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 </style>
