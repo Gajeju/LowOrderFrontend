@@ -1,6 +1,7 @@
 <template>
   <div class="menu-management">
-    <Logout />
+    <Sidebar />
+    <!-- <Logout /> -->
     <div class="header">
       <button @click="openModal" class="add-menu-button">메뉴 추가</button>
     </div>
@@ -66,12 +67,14 @@
 </template>
 
 <script>
+import Sidebar from "./Sidebar.vue";
 import axios from "axios";
 import Logout from "./Logout.vue";
 
 export default {
   components: {
-    Logout,
+    // Logout,
+    Sidebar,
   },
   data() {
     return {
@@ -219,6 +222,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
+  margin-left: 230px;
 }
 
 .menu-card {
@@ -279,21 +283,21 @@ export default {
 }
 
 .edit-button {
-  background-color: #fdcb6e;
+  background-color: #0984e3;
   color: white;
 }
 
 .edit-button:hover {
-  background-color: #e1b954;
+  background-color: #74b9ff;
 }
 
 .delete-button {
-  background-color: #d63031;
+  background-color: #000000;
   color: white;
 }
 
 .delete-button:hover {
-  background-color: #c0392b;
+  background-color: #333333;
 }
 
 .modal {

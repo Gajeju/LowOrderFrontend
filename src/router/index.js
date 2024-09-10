@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../components/Login.vue";
 import MenuManagement from "../components/MenuManagement.vue";
 import Order from "@/components/Order.vue";
+import OrderManagement from "@/components/OrderManagement.vue";
 
 const routes = [
   {
@@ -24,6 +25,12 @@ const routes = [
     path: "/order", // URL을 /menu로 변경
     name: "Order",
     component: Order,
+    meta: { requiresAuth: true }, // 로그인한 사용자만 접근 가능
+  },
+  {
+    path: "/order-management", // URL을 /menu로 변경
+    name: "OrderManagement",
+    component: OrderManagement,
     meta: { requiresAuth: true }, // 로그인한 사용자만 접근 가능
   },
 ];
