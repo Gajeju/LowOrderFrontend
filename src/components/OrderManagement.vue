@@ -2,14 +2,15 @@
   <div class="layout">
     <Sidebar />
     <div class="order-container">
+      <button @click="getAiSuggestions" class="ai-button">AI 제안</button>
       <table class="order-table">
         <thead>
           <tr>
-            <th>Order ID</th>
-            <th>Total Price</th>
-            <th>Order Time</th>
-            <th>Details</th>
-            <th>Actions</th>
+            <th>주문번호</th>
+            <th>결제 금액</th>
+            <th>경과 시간</th>
+            <th>세부 주문사항</th>
+            <th>완료 여부</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +34,15 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- 모달 창 -->
+      <div v-if="showModal" class="modal">
+        <div class="modal-content">
+          <h3>AI 제안</h3>
+          <p>{{ aiResponse }}</p>
+          <button @click="closeModal">닫기</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +58,7 @@ export default {
   data() {
     return {
       orders: [],
+      showModal: false,
     };
   },
   mounted() {
@@ -103,6 +114,26 @@ export default {
           return order;
         });
       }, 1000);
+    },
+    async getAiSuggestions() {
+      const storeId = localStorage.getItem("store_id");
+
+      try {
+        const response = await axios.post(
+          "http://localhost:8081/api/ai/suggestions",
+          {
+            storeId: storeId,
+          }
+        );
+
+        this.aiResponse = response.data;
+        this.showModal = true; // 모달 창 열기
+      } catch (error) {
+        console.error("Error fetching AI suggestions:", error);
+      }
+    },
+    closeModal() {
+      this.showModal = false;
     },
   },
 };
@@ -171,5 +202,63 @@ h2 {
 
 .delete-button:hover {
   background-color: #e60000;
+}
+
+/* AI 제안 버튼 */
+.ai-button {
+  background-color: #00b894;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.ai-button:hover {
+  background-color: #008f68;
+}
+
+/* 모달 스타일 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  background-color: #00b894;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none; /* li의 기본 점을 제거 */
+  padding-left: 0; /* 기본적으로 들어가는 padding 제거 (선택 사항) */
+}
+
+li {
+  margin-bottom: 10px; /* 각 항목 간의 간격 (선택 사항) */
 }
 </style>
